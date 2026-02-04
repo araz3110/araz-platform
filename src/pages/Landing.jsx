@@ -1,12 +1,12 @@
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { useMemo, useState } from "react";
 
 export default function Landing() {
   const nav = useNavigate();
 
-  // üst menü (desktop)
   const navItems = useMemo(
     () => [
+      { label: "Home", to: "#top" },
       { label: "Rooms", to: "#rooms" },
       { label: "RFQs", to: "#rfqs" },
       { label: "Suppliers", to: "#suppliers" },
@@ -15,19 +15,23 @@ export default function Landing() {
     []
   );
 
-  // (şimdilik sign in button çalışmıyor, sonra yapacağız)
-  const [_, setDummy] = useState(false);
+  const scrollTo = (hash) => {
+    const el = document.querySelector(hash);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
-    <div className="shell">
-      <div className="bg" />
-      <div className="noise" />
+    <div className="shell" id="top">
+      {/* garanti: bu katmanlar tıklama yakalamaz */}
+      <div className="bg" aria-hidden="true" />
+      <div className="noise" aria-hidden="true" />
 
       {/* TOPBAR */}
       <header className="topbar">
-        <div className="brand">
+        <div className="brand" role="banner">
           <div className="brandMark">
-            <img src="/azem-miran-logo.png" alt="AZEM MIRAN" />
+            <img className="brandLogo" src="/azem-miran-logo.png" alt="AZEM MIRAN" />
           </div>
 
           <div className="brandText">
@@ -36,23 +40,25 @@ export default function Landing() {
           </div>
         </div>
 
-        <nav className="topnav" aria-label="Primary">
+        {/* NAV: mobilde en stabil yöntem = anchor + preventDefault + scrollIntoView */}
+        <nav className="topnav" aria-label="Primary navigation">
           {navItems.map((i) => (
-            <button
+            <a
               key={i.label}
               className="navBtn"
-              onClick={() => {
-                const el = document.querySelector(i.to);
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+              href={i.to}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollTo(i.to);
               }}
             >
               {i.label}
-            </button>
+            </a>
           ))}
         </nav>
 
         <div className="topRight">
-          <button className="ghostBtn" onClick={() => setDummy((v) => !v)}>
+          <button className="ghostBtn" type="button" onClick={() => nav("/join/supplier")}>
             Sign in
           </button>
         </div>
@@ -78,46 +84,38 @@ export default function Landing() {
           </p>
 
           <div className="ctaRow">
-            <button
-              className="primary"
-              onClick={() => nav("/join/supplier")}
-              type="button"
-            >
+            <button className="primary" type="button" onClick={() => nav("/join/supplier")}>
               JOIN AS SUPPLIER
             </button>
 
-            <button
-              className="secondary"
-              onClick={() => nav("/join/expert")}
-              type="button"
-            >
+            <button className="secondary" type="button" onClick={() => nav("/join/expert")}>
               JOIN AS EXPERT
             </button>
           </div>
 
-          {/* Mini cards */}
+          {/* Mini cards (anchors) */}
           <div className="miniRow">
-            <div className="miniCard" id="rooms">
+            <div className="miniCard sectionAnchor" id="rooms">
               <div className="miniTitle">ROOMS</div>
               <div className="miniText">Curated categories. No noise.</div>
             </div>
 
-            <div className="miniCard" id="rfqs">
+            <div className="miniCard sectionAnchor" id="rfqs">
               <div className="miniTitle">RFQs</div>
               <div className="miniText">Request quotes. Compare offers.</div>
             </div>
 
-            <div className="miniCard" id="verified">
+            <div className="miniCard">
               <div className="miniTitle">VERIFIED</div>
               <div className="miniText">Trust-first access control.</div>
             </div>
           </div>
         </section>
 
-        {/* RIGHT (Phone mock) */}
-        <section className="heroRight" id="suppliers">
+        {/* RIGHT */}
+        <section className="heroRight sectionAnchor" id="suppliers">
           <div className="phone" role="region" aria-label="Onboarding preview">
-            <div className="phoneTop">
+            <div className="phoneTop" aria-hidden="true">
               <span className="dot" />
               <span className="dot" />
               <span className="dot" />
@@ -149,8 +147,8 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* anchor for experts */}
-          <div id="experts" style={{ height: 1 }} />
+          {/* Experts anchor */}
+          <div id="experts" className="anchor sectionAnchor" />
         </section>
       </main>
     </div>

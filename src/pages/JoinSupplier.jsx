@@ -8,11 +8,14 @@ export default function JoinSupplier() {
       <div className="bg" />
       <div className="noise" />
 
+      {/* TOPBAR */}
       <header className="topbar">
         <div className="brand">
           <div className="brandMark">
+            {/* public/ içindeki dosya: başına / koyuyoruz */}
             <img src="/azem-miran-logo.png" alt="AZEM MIRAN" />
           </div>
+
           <div className="brandText">
             <div className="brandName">AZEM MIRAN</div>
             <div className="brandTag">Supplier onboarding • Verified Network</div>
@@ -20,57 +23,48 @@ export default function JoinSupplier() {
         </div>
 
         <div className="topRight">
-          <button className="ghostBtn" onClick={() => nav("/")}>
+          <button className="ghostBtn" type="button" onClick={() => nav("/")}>
             Back
           </button>
         </div>
       </header>
 
-      <main className="hero" style={{ gridTemplateColumns: "1fr" }}>
-        <section className="heroLeft">
-          <div className="pill">SUPPLIER ONBOARDING</div>
+      {/* CONTENT */}
+      <main className="joinPage">
+        <section className="joinCard" aria-label="Supplier onboarding">
+          <div className="joinTitle">Join as Supplier</div>
+          <div className="joinSub">
+            Verified access • Start with basic details
+          </div>
 
-          <h1 className="h1">
-            <span className="hGlow hStrong">Join as a Supplier</span>
-          </h1>
+          <div className="joinGrid">
+            <label className="field">
+              <span>Full Name</span>
+              <input placeholder="John Smith" autoComplete="name" />
+            </label>
 
-          <p className="sub">
-            Create your verified supplier profile.
-            <br />
-            Receive RFQs and close deals faster.
-          </p>
+            <label className="field">
+              <span>Company</span>
+              <input placeholder="Company Ltd." autoComplete="organization" />
+            </label>
 
-          <div className="phone" style={{ marginTop: 18 }}>
-            <div className="phoneTop">
-              <span className="dot" />
-              <span className="dot" />
-              <span className="dot" />
-            </div>
+            <label className="field">
+              <span>Email</span>
+              <input placeholder="name@company.com" autoComplete="email" />
+            </label>
 
-            <div className="phoneBody">
-              <div className="phoneTitle">Supplier details</div>
+            <label className="field">
+              <span>Phone</span>
+              <input placeholder="+90 ..." autoComplete="tel" />
+            </label>
+          </div>
 
-              <label className="field">
-                <span>Full name</span>
-                <input placeholder="John Smith" />
-              </label>
+          <button className="primary joinBtn" type="button">
+            Continue
+          </button>
 
-              <label className="field">
-                <span>Email</span>
-                <input placeholder="name@company.com" />
-              </label>
-
-              <label className="field">
-                <span>Phone</span>
-                <input placeholder="+90 ..." />
-              </label>
-
-              <button className="phoneBtn" type="button">
-                Continue
-              </button>
-
-              <div className="phoneHint">Next: company, category, verification.</div>
-            </div>
+          <div className="phoneHint">
+            Next: categories, proof, verification.
           </div>
         </section>
       </main>

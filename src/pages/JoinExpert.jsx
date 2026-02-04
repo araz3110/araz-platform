@@ -8,11 +8,13 @@ export default function JoinExpert() {
       <div className="bg" />
       <div className="noise" />
 
+      {/* TOPBAR */}
       <header className="topbar">
         <div className="brand">
           <div className="brandMark">
             <img src="/azem-miran-logo.png" alt="AZEM MIRAN" />
           </div>
+
           <div className="brandText">
             <div className="brandName">AZEM MIRAN</div>
             <div className="brandTag">Expert onboarding • Verified Network</div>
@@ -20,57 +22,48 @@ export default function JoinExpert() {
         </div>
 
         <div className="topRight">
-          <button className="ghostBtn" onClick={() => nav("/")}>
+          <button className="ghostBtn" type="button" onClick={() => nav("/")}>
             Back
           </button>
         </div>
       </header>
 
-      <main className="hero" style={{ gridTemplateColumns: "1fr" }}>
-        <section className="heroLeft">
-          <div className="pill">EXPERT ONBOARDING</div>
+      {/* CONTENT */}
+      <main className="joinPage">
+        <section className="joinCard" aria-label="Expert onboarding">
+          <div className="joinTitle">Join as Expert</div>
+          <div className="joinSub">
+            Verified profile • Share your expertise
+          </div>
 
-          <h1 className="h1">
-            <span className="hGlow hStrong">Join as an Expert</span>
-          </h1>
+          <div className="joinGrid">
+            <label className="field">
+              <span>Full Name</span>
+              <input placeholder="Jane Doe" autoComplete="name" />
+            </label>
 
-          <p className="sub">
-            Build a verified expert profile.
-            <br />
-            Get matched with real needs.
-          </p>
+            <label className="field">
+              <span>Email</span>
+              <input placeholder="name@company.com" autoComplete="email" />
+            </label>
 
-          <div className="phone" style={{ marginTop: 18 }}>
-            <div className="phoneTop">
-              <span className="dot" />
-              <span className="dot" />
-              <span className="dot" />
-            </div>
+            <label className="field">
+              <span>Phone</span>
+              <input placeholder="+90 ..." autoComplete="tel" />
+            </label>
 
-            <div className="phoneBody">
-              <div className="phoneTitle">Expert details</div>
+            <label className="field">
+              <span>Expertise</span>
+              <input placeholder="Packaging, sourcing, compliance..." />
+            </label>
+          </div>
 
-              <label className="field">
-                <span>Full name</span>
-                <input placeholder="John Smith" />
-              </label>
+          <button className="primary joinBtn" type="button">
+            Continue
+          </button>
 
-              <label className="field">
-                <span>Email</span>
-                <input placeholder="name@company.com" />
-              </label>
-
-              <label className="field">
-                <span>Phone</span>
-                <input placeholder="+90 ..." />
-              </label>
-
-              <button className="phoneBtn" type="button">
-                Continue
-              </button>
-
-              <div className="phoneHint">Next: expertise, proof, verification.</div>
-            </div>
+          <div className="phoneHint">
+            Next: proof, verification, visibility settings.
           </div>
         </section>
       </main>
