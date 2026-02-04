@@ -1,0 +1,467 @@
+/* =========================
+   AZEM MIRAN — APP CSS (clean)
+   - No orange (blue/cyan theme)
+   - No horizontal scroll
+   - Mobile safe
+========================= */
+
+:root{
+  --bg0:#05070c;
+  --bg1:#070a12;
+
+  --glass: rgba(255,255,255,.06);
+  --stroke: rgba(255,255,255,.14);
+
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.68);
+  --muted2: rgba(255,255,255,.46);
+
+  --blue: rgba(70,120,255,1);
+  --cyan: rgba(0,212,255,1);
+
+  --shadow: rgba(0,0,0,.55);
+}
+
+*{ box-sizing:border-box; max-width:100%; }
+html,body{ height:100%; width:100%; overflow-x:hidden; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: var(--bg0);
+  color: var(--text);
+}
+
+/* Root shell */
+.shell{
+  min-height:100vh;
+  width:100%;
+  position:relative;
+  overflow-x:hidden;
+}
+
+/* Background (safe: no inset:-20% => no horizontal scroll) */
+.bg{
+  position:absolute;
+  inset:0;
+  transform: scale(1.25);
+  transform-origin:center;
+  background:
+    radial-gradient(900px 520px at 12% 18%, rgba(0,212,255,.18), transparent 62%),
+    radial-gradient(780px 520px at 85% 22%, rgba(70,120,255,.22), transparent 62%),
+    radial-gradient(900px 720px at 55% 92%, rgba(40,220,170,.10), transparent 65%),
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+  filter:saturate(120%);
+  pointer-events:none;
+}
+
+.noise{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  mix-blend-mode: overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+}
+
+/* =========================
+   TOP BAR
+========================= */
+.topbar{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:18px 22px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width: 220px;
+}
+.brandMark{
+  width:44px; height:44px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 18px 40px rgba(70,120,255,.14);
+}
+
+/* If you put an <img> inside brandMark, it will fit */
+.brandMark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.brandText{ display:flex; flex-direction:column; gap:4px; }
+.brandName{
+  font-weight:950;
+  letter-spacing:.6px;
+  line-height:1;
+}
+.brandTag{
+  font-size:12px;
+  color: var(--muted2);
+  line-height:1.2;
+}
+
+.topnav{
+  display:flex;
+  gap:10px;
+  flex-wrap:nowrap;
+}
+
+.navBtn{
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  backdrop-filter: blur(10px);
+  white-space:nowrap;
+}
+.navBtn:hover{
+  border-color:rgba(255,255,255,.18);
+  color: var(--text);
+}
+
+.topRight{
+  display:flex;
+  justify-content:flex-end;
+  min-width: 110px;
+}
+.ghostBtn{
+  border:1px solid rgba(255,255,255,.10);
+  background: transparent;
+  color: var(--muted);
+  padding:10px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.ghostBtn:hover{
+  border-color:rgba(255,255,255,.18);
+  color: var(--text);
+}
+
+/* =========================
+   HERO LAYOUT
+========================= */
+.hero{
+  position:relative;
+  z-index:2;
+  max-width:1180px;
+  margin:0 auto;
+  padding: 26px 22px 60px;
+  display:grid;
+  grid-template-columns: 1.2fr .9fr;
+  gap:28px;
+  align-items:center;
+}
+
+.heroLeft{ padding-top:6px; }
+
+.pill{
+  display:inline-flex;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.80);
+  font-weight:800;
+  letter-spacing:.4px;
+}
+
+.h1{
+  margin:18px 0 10px;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height:1.06;
+}
+.hGlow{
+  color: rgba(255,255,255,.88);
+  text-shadow: 0 0 26px rgba(70,120,255,.22);
+  font-weight: 850;
+}
+.hStrong{
+  font-weight: 950;
+  letter-spacing:.8px;
+}
+
+.sub{
+  margin:0;
+  color: rgba(255,255,255,.72);
+  font-size:16px;
+  line-height:1.55;
+}
+
+.ctaRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:18px;
+}
+
+.primary{
+  border:0;
+  border-radius:999px;
+  padding:12px 16px;
+  color:#061018;
+  font-weight:950;
+  cursor:pointer;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  box-shadow: 0 18px 45px rgba(70,120,255,.18);
+}
+.secondary{
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  padding:12px 16px;
+  color: rgba(255,255,255,.88);
+  font-weight:900;
+  cursor:pointer;
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(12px);
+}
+.secondary:hover{ border-color:rgba(255,255,255,.28); }
+
+.miniRow{
+  margin-top:18px;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:12px;
+}
+
+.miniCard{
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  border-radius:16px;
+  padding:14px;
+  backdrop-filter: blur(12px);
+}
+
+.miniTitle{
+  font-weight:950;
+  letter-spacing:.6px;
+  font-size:12px;
+}
+.miniText{
+  margin-top:6px;
+  color: rgba(255,255,255,.62);
+  font-size:12px;
+  line-height:1.35;
+}
+
+/* =========================
+   PHONE MOCK
+========================= */
+.heroRight{ display:flex; justify-content:flex-end; }
+
+.phone{
+  width:min(420px, 92vw);
+  border-radius:26px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 30px 70px rgba(0,0,0,.45);
+  overflow:hidden;
+}
+
+.phoneTop{
+  display:flex;
+  gap:8px;
+  padding:14px 14px 10px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+.dot{
+  width:10px; height:10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.24);
+}
+.phoneBody{ padding:16px; }
+
+.phoneTitle{
+  font-weight:950;
+  letter-spacing:.6px;
+  margin-bottom:10px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin:10px 0;
+}
+.field span{
+  font-size:12px;
+  color: rgba(255,255,255,.65);
+  font-weight:800;
+}
+.field input{
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.26);
+  color: rgba(255,255,255,.92);
+  padding:12px 12px;
+  outline:none;
+}
+.field input::placeholder{ color: rgba(255,255,255,.35); }
+.field input:focus{ border-color: rgba(0,212,255,.40); }
+
+.phoneBtn{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:12px 14px;
+  font-weight:950;
+  cursor:pointer;
+  margin-top:10px;
+  color:#061018;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  box-shadow: 0 18px 45px rgba(70,120,255,.18);
+}
+.phoneHint{
+  margin-top:10px;
+  font-size:12px;
+  color: rgba(255,255,255,.55);
+}
+
+/* =========================
+   MODAL (Join Supplier/Expert)
+========================= */
+.modalOverlay{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.55);
+  display:grid;
+  place-items:center;
+  padding:18px;
+  z-index:50;
+}
+
+.modalCard{
+  width:min(560px, 94vw);
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(10,12,18,.74);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 40px 100px rgba(0,0,0,.55);
+  padding:18px;
+  position:relative;
+}
+
+.modalClose{
+  position:absolute;
+  top:12px;
+  right:12px;
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.85);
+  cursor:pointer;
+}
+.modalClose:hover{ border-color:rgba(255,255,255,.22); }
+
+.modalHead{ padding:8px 6px 14px; }
+.modalTitle{ font-weight:950; font-size:20px; letter-spacing:.4px; }
+.modalSub{
+  margin-top:6px;
+  color: rgba(255,255,255,.65);
+  font-size:13px;
+  line-height:1.4;
+}
+
+.modalGrid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+  padding: 0 6px 14px;
+}
+
+.mField{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.mField span{
+  font-size:12px;
+  color: rgba(255,255,255,.62);
+  font-weight:900;
+}
+.mField input{
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(0,0,0,.28);
+  color: rgba(255,255,255,.92);
+  padding:12px 12px;
+  outline:none;
+}
+.mField input::placeholder{ color: rgba(255,255,255,.35); }
+.mField input:focus{ border-color: rgba(0,212,255,.40); }
+
+.modalPrimary{
+  width:calc(100% - 12px);
+  margin: 0 6px;
+  border:0;
+  border-radius:16px;
+  padding:12px 14px;
+  font-weight:950;
+  cursor:pointer;
+  color:#061018;
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  box-shadow: 0 18px 45px rgba(70,120,255,.16);
+}
+
+.modalLinks{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+  color: rgba(255,255,255,.60);
+  font-size:13px;
+  flex-wrap:wrap;
+  text-align:center;
+}
+.linkBtn{
+  border:0;
+  background: transparent;
+  color: rgba(255,255,255,.80);
+  cursor:pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.sep{ opacity:.5; }
+.modalFoot{
+  margin-top:10px;
+  text-align:center;
+  color: rgba(255,255,255,.45);
+  font-size:12px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 920px){
+  .topnav{ display:none; } /* prevents overflow on mobile */
+  .hero{
+    grid-template-columns:1fr;
+    padding:18px 16px 34px;
+    gap:18px;
+  }
+  .heroRight{ justify-content:flex-start; }
+  .miniRow{ grid-template-columns:1fr; }
+  .miniCard{ padding:12px; }
+  .phone{ width:100%; }
+  .modalGrid{ grid-template-columns:1fr; }
+}
+#root { width: 100%; min-height: 100vh; }
